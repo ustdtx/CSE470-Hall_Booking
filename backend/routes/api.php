@@ -95,3 +95,7 @@ Route::middleware('auth:sanctum')->get('/admin/dashboard', [AdminDashboardContro
 Route::post('/bookings/report', [\App\Http\Controllers\BookingController::class, 'generateReport']);
 
 Route::post('/payments/nagad', [PaymentController::class, 'nagadPay']);
+
+use App\Http\Controllers\MemberController;
+Route::get('/admin/members', [MemberController::class, 'index'])->name('admin.members');
+Route::post('/admin/members', [MemberController::class, 'store'])/*->name('admin.members.store')*/;

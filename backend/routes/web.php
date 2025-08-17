@@ -108,9 +108,9 @@ Route::put('/admin/admins/{id}', [AdminController::class, 'update'])->name('admi
 Route::delete('/admin/admins/{id}', [AdminController::class, 'destroy'])->name('admin.admins.destroy');
 
 // Admin members management page (Blade)
-use App\Http\Controllers\MemberController;
+/*use App\Http\Controllers\MemberController;
 Route::get('/admin/members', [MemberController::class, 'index'])->name('admin.members');
-Route::post('/admin/members', [MemberController::class, 'store'])->name('admin.members.store');
+Route::post('/admin/members', [MemberController::class, 'store'])/*->name('admin.members.store')*/;
 Route::get('/admin/members/{id}/edit', [MemberController::class, 'edit'])->name('admin.members.edit');
 Route::put('/admin/members/{id}', [MemberController::class, 'update'])->name('admin.members.update');
 Route::delete('/admin/members/{id}', [MemberController::class, 'destroy'])->name('admin.members.destroy');

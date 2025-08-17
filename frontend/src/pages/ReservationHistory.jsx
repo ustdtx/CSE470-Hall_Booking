@@ -240,7 +240,6 @@ export default function ReservationHistory() {
       </div >
       <div className="bottom-0">
 
-      <Footer />
       </div>
     </div>
   );

@@ -258,10 +258,10 @@ class PaymentController extends Controller
     }
     public function manualAdd(Request $request)
     {
-        $admin = \Auth::guard('admin')->user();
+        /*$admin = \Auth::guard('admin')->user();
         if (!$admin || $admin->role !== 'admin') {
             return response()->json(['error' => 'Forbidden'], 403);
-        }
+        }*/
         $data = $request->validate([
             'booking_id' => 'required|exists:bookings,id',
             'purpose' => 'required|in:Pre-Book,Final',
@@ -306,7 +306,7 @@ class PaymentController extends Controller
             $booking->status = 'Pre-Booked';
             $booking->expires_at = now()->addHours(48);
             $remaining = $totalAmount - $preBookCharge;
-            // Send Pre-Book confirmation mail for cash/manual only if member and email exist
+            /* Send Pre-Book confirmation mail for cash/manual only if member and email exist
             if ($member && $memberEmail) {
                 \Mail::raw(
                     "Your cash payment of Pre-Booking charge {$preBookCharge}BDT for {$hallName} Shift: {$shift} on {$bookingDate} has been received.\nTotal amount: {$totalAmount} BDT, Pre-Booking Charge: {$preBookCharge} BDT, Remaining amount: {$remaining} BDT. Please pay the remaining amount within 48 hours to confirm your booking.",
@@ -376,14 +376,14 @@ class PaymentController extends Controller
                 if (!empty($adminPhone)) {
                     SmsHelper::send($adminPhone, $adminText);
                 }
-            }
+            }*/
         }
 
         $booking->save();
 
-        // Log manualAdd
+        /* Log manualAdd
         $desc = $admin->name . ' made ' . $data['purpose'] . ' payment for booking_id: ' . $data['booking_id'];
-        SimpleLogger::log('manualAdd', $desc);
+        SimpleLogger::log('manualAdd', $desc);*/
 
         return response()->json([
             'message' => 'Manual payment successful',

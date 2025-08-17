@@ -681,7 +681,7 @@ const UpdateBooking = () => {
         </div>
       )}
       <div className='py-7'>
-        <Footer />
+
       </div>
     </div>
   );

@@ -33,5 +33,6 @@ class VerifyCsrfToken extends Middleware
         'api/halls/*/images',
         // Exclude all charges endpoints
         'api/halls/*/charges/*',
+        'admin/login', // Exclude admin login from CSRF
     ];
 }

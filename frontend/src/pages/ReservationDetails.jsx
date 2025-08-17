@@ -535,7 +535,6 @@ export default function ReservationDetails() {
           </div>
 
           <div className="absolute bg-[#232323] left-0">
-            <Footer />
           </div>
         </div>
       </div>

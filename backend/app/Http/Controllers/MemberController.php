@@ -34,24 +34,27 @@ class MemberController extends Controller
     // Store new member
     public function store(Request $request)
     {
-        $admin = \Auth::guard('admin')->user();
+        /*$admin = \Auth::guard('admin')->user();
         if (!$admin || $admin->role !== 'admin') {
             return back()->withInput()->withErrors(['error' => 'Failed to add member. Unauthorized action.']);
-        }
+        }*/
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'club_account' => 'required|string|max:255',
             'email' => 'required|email|unique:members,email',
             'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
             'date_joined' => 'nullable|date',
         ]);
         if (empty($data['date_joined'])) {
             $data['date_joined'] = now()->toDateString();
         }
         $member = Member::create($data);
-        SimpleLogger::log('member_add', $admin->name.' added member: '.$data['name'].' ('.$data['email'].')');
-        return redirect()->back()->with('success', 'Member added successfully!');
+        //SimpleLogger::log('member_add', $admin->name.' added member: '.$data['name'].' ('.$data['email'].')');
+        return response()->json([
+            'message' => 'Member added successfully',
+            'member' => $member,
+        ]);
     }
 
     // Show edit form
@@ -76,9 +79,9 @@ class MemberController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'club_account' => 'required|string|max:255',
-            'email' => 'required|email|unique:members,email,'.$editMember->id,
+            'email' => 'required|unique:members,email,'.$editMember->id,
             'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
             'date_joined' => 'nullable|date',
         ]);
         if (empty($data['date_joined'])) {
